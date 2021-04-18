@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Deck_update : MonoBehaviour
+{
+    D_GameScene d_gamescene;
+
+    public GameObject[] Tile = new GameObject[14];
+    public GameObject[] Tiletxt = new GameObject[14];
+    public GameObject Decktxt;
+    // Start is called before the first frame update
+    void Start()
+    {
+        d_gamescene = GameObject.Find("Canvas").GetComponent<D_GameScene>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Deck_upt();
+    }
+
+    public void Deck_upt()
+    {
+        Decktxt.GetComponent<Text>().text = "현재 Player " + d_gamescene.player_turn + "이\n 가지고 있는 카드입니다";
+
+        for ( int i = 0; i < 14; i++ )
+        {
+            if (d_gamescene.player_turn == 1 )
+            {
+                // Black 3, 4
+                if ( d_gamescene.p1_tile_state[i] >= 3 )
+                {
+                    if (d_gamescene.p1_tile_state[i] == 3) Tile[i].GetComponent<Image>().sprite = Resources.Load("Black", typeof(Sprite)) as Sprite;
+                    else Tile[i].GetComponent<Image>().sprite = Resources.Load("BlackO", typeof(Sprite)) as Sprite;
+                    Tiletxt[i].GetComponent<Text>().text = "<color=#ffffff>" + d_gamescene.p1_tile[i] + "</color>";
+                }
+                // White 1, 2
+                else if (d_gamescene.p1_tile_state[i] >= 1 )
+                {
+                    if (d_gamescene.p1_tile_state[i] == 1) Tile[i].GetComponent<Image>().sprite = Resources.Load("White", typeof(Sprite)) as Sprite;
+                    else Tile[i].GetComponent<Image>().sprite = Resources.Load("WhiteO", typeof(Sprite)) as Sprite;
+                    Tiletxt[i].GetComponent<Text>().text = "<color=#000000>" + d_gamescene.p1_tile[i] + "</color>";
+                }
+                // None 0
+                else
+                {
+                    Tile[i].GetComponent<Image>().sprite = Resources.Load("None", typeof(Sprite)) as Sprite;
+                    Tiletxt[i].GetComponent<Text>().text = "";
+                }
+            }
+            else
+            {
+                // Black 3, 4
+                if (d_gamescene.p2_tile_state[i] >= 3)
+                {
+                    if (d_gamescene.p2_tile_state[i] == 3) Tile[i].GetComponent<Image>().sprite = Resources.Load("Black", typeof(Sprite)) as Sprite;
+                    else Tile[i].GetComponent<Image>().sprite = Resources.Load("BlackO", typeof(Sprite)) as Sprite;
+                    Tiletxt[i].GetComponent<Text>().text = "<color=#ffffff>" + d_gamescene.p2_tile[i] + "</color>";
+                }
+                // White 1, 2
+                else if (d_gamescene.p2_tile_state[i] >= 1)
+                {
+                    if (d_gamescene.p2_tile_state[i] == 1) Tile[i].GetComponent<Image>().sprite = Resources.Load("White", typeof(Sprite)) as Sprite;
+                    else Tile[i].GetComponent<Image>().sprite = Resources.Load("WhiteO", typeof(Sprite)) as Sprite;
+                    Tiletxt[i].GetComponent<Text>().text = "<color=#000000>" + d_gamescene.p2_tile[i] + "</color>";
+                }
+                // None 0
+                else
+                {
+                    Tile[i].GetComponent<Image>().sprite = Resources.Load("None", typeof(Sprite)) as Sprite;
+                    Tiletxt[i].GetComponent<Text>().text = "";
+                }
+            }
+        }
+    }
+}

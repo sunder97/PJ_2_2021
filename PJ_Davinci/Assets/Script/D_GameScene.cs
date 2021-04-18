@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class D_GameScene : MonoBehaviour
 {
-    public GameObject tcs, p_t1, p_t2, p_t3o, p_t3x;
+    public GameObject tcs, p_t1, p_t2, p_t3o, p_t3x, go;
 
     public GameObject t_player, nt_player, tp_wnum, tp_bnum, ntp_wnum, ntp_bnum;
 
-    public List<int> white_tile = new List<int> { -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
-    public List<int> black_tile = new List<int> { -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+    // 덱의 상태
+    public List<int> white_tile = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+    public List<int> black_tile = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 
+    // 플레이어의 상태
     public int[] p1_tile = new int[] { -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2 };
     public int p1_count = 0;
     public int p1_wcount = 0;
@@ -25,8 +27,11 @@ public class D_GameScene : MonoBehaviour
     public int[] p1_tile_state = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int[] p2_tile_state = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+    // 게임의 상태 및 필요 변수들 선언
     public int game_state = 0;
     public int player_turn = 1;
+    public int choiceNum, choiceidx, choicecolor;
+    public int turnidx, turncolor;
 
     // Start is called before the first frame update
     void Start()
@@ -59,8 +64,11 @@ public class D_GameScene : MonoBehaviour
         if (game_state <= 1)
         {
             tcs.SetActive(true);
+            p_t1.SetActive(false);
+            p_t2.SetActive(false);
             p_t3o.SetActive(false);
             p_t3x.SetActive(false);
+            go.SetActive(false);
         }
         else if (game_state == 2)
         {
@@ -80,6 +88,11 @@ public class D_GameScene : MonoBehaviour
         else if (game_state == 5)
         {
             p_t3x.SetActive(true);
+            p_t2.SetActive(false);
+        }
+        else
+        {
+            go.SetActive(true);
             p_t2.SetActive(false);
         }
     }
