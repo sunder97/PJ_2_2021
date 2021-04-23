@@ -37,9 +37,17 @@ public class PT3O : MonoBehaviour
     // 맞췄을 때 턴 종료
     public void turn_over()
     {
-        if (d_gamescene.player_turn == 1) d_gamescene.player_turn = 2;
-        else d_gamescene.player_turn = 1;
-        d_gamescene.game_state = 1;
-        d_gamescene.p_t3o.SetActive(false);
+        // 2P 모드일 때
+        if (d_gamescene.game_mode == 2)
+        {
+            if (d_gamescene.player_turn == 1) d_gamescene.player_turn = 2;
+            else d_gamescene.player_turn = 1;
+            d_gamescene.game_state = 1;
+        }
+        // 1P 모드일 때
+        else
+        {
+            d_gamescene.game_state = -1;
+        }
     }
 }

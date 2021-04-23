@@ -23,9 +23,13 @@ public class Deck_update : MonoBehaviour
         Deck_upt();
     }
 
+    // 현재 턴인 플레이어가 가진 타일의 숫자를 보여주는 함수
     public void Deck_upt()
     {
-        Decktxt.GetComponent<Text>().text = "현재 Player " + d_gamescene.player_turn + "이\n 가지고 있는 카드입니다";
+        // 1P 모드에선 내부 변수인 player_turn이 바뀌지 않아 따로 추가할 코드가 없습니다.
+
+
+        Decktxt.GetComponent<Text>().text = "현재 Player " + d_gamescene.player_turn + "이\n 가지고 있는 숫자입니다";
 
         for ( int i = 0; i < 14; i++ )
         {

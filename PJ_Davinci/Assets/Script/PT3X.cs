@@ -94,9 +94,13 @@ public class PT3X : MonoBehaviour
     // 실패 시, 턴 넘김
     public void turn_end()
     {
-        if (d_gamescene.player_turn == 1) d_gamescene.player_turn = 2;
-        else d_gamescene.player_turn = 1;
-        d_gamescene.game_state = 1;
+        if (d_gamescene.game_mode == 2)
+        {
+            if (d_gamescene.player_turn == 1) d_gamescene.player_turn = 2;
+            else d_gamescene.player_turn = 1;
+            d_gamescene.game_state = 1;
+        }
+        else d_gamescene.game_state = -1;
         d_gamescene.p_t3x.SetActive(false);
     }
 }
