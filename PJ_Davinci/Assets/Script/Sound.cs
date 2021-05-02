@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// 사운드 스크립트, 아직 미구현
 public class Option : MonoBehaviour
 {
     public Slider BGMslider, SEslider;

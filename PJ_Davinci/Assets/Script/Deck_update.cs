@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 현재 자신이 가진 타일들의 상태를 확인하는 인게임 내 버튼용 스크립트
 public class Deck_update : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -31,6 +32,7 @@ public class Deck_update : MonoBehaviour
 
         Decktxt.GetComponent<Text>().text = "현재 Player " + d_gamescene.player_turn + "이\n 가지고 있는 숫자입니다";
 
+        // 최대 14장의 타일을 가지고 있을 수 있기 때문에, 14개의 타일을 확인해 소지한 타일만 노출
         for ( int i = 0; i < 14; i++ )
         {
             if (d_gamescene.player_turn == 1 )

@@ -4,6 +4,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 상대 타일 중 맞출 타일 하나를 선택하는 단계의 스크립트
 public class PT1 : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -110,19 +111,23 @@ public class PT1 : MonoBehaviour
         }
     }
 
-    // Pt1에서 카드를 선택했을 때
+    // Pt1 패널에서 타일을 선택했을 때 실행되는 함수
     public void choice_num(int num)
     {
+        // 1플레이어의 턴
         if (d_gamescene.player_turn == 1)
         {
+            // 선택한 타일이 이미 열린 타일일 경우 다른 기능 없이 리턴
             if (d_gamescene.p2_tile[num] == -2 || d_gamescene.p2_tile_state[num] == 2 || d_gamescene.p2_tile_state[num] == 4)
             {
                 Debug.Log("return");
                 return;
             }
         }
+        // 2플레이어의 턴
         else
         {
+            // 선택한 타일이 이미 열린 타일일 경우 다른 기능 없이 리턴
             if (d_gamescene.p1_tile[num] == -2 || d_gamescene.p1_tile_state[num] == 2 || d_gamescene.p1_tile_state[num] == 4)
             {
                 Debug.Log("return");
@@ -130,7 +135,11 @@ public class PT1 : MonoBehaviour
             }
         }
 
+    // 위의 경우에 해당되지 않는경우 실행되는 게임 진행 코드
+
         d_gamescene.game_state = 3;
+
+        // 선택한 상대 타일의 정보를 저장해두어 다음 단계에서 타일의 숫자를 맞추는지 확인 및 맞추고나서 타일의 상태를 열린 타일로 바꿀 때 사용되는 변수들의 값 저장
         d_gamescene.choiceidx = num;
         if (d_gamescene.player_turn == 1)
         {

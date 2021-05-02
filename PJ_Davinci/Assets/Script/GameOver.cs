@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// 어느 한 쪽이 승리조건을 달성했을 때, 게임의 상태를 체크하여 결과 패널을 띄워주는 스크립트
 public class GameOver : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -15,7 +16,7 @@ public class GameOver : MonoBehaviour
         d_gamescene = GameObject.Find("Canvas").GetComponent<D_GameScene>();
     }
 
-    // Update is called once per frame
+    // 게임 내 변수들을 체크해 텍스트로 노출
     void Update()
     {
         // 2P 모드일 때
@@ -28,6 +29,7 @@ public class GameOver : MonoBehaviour
         }
     }
 
+    // 게임이 종료되고 다시 메인화면으로 돌아가는 함수
     public void gomain()
     {
         SceneManager.LoadScene("MainScene");

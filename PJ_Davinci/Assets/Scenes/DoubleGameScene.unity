@@ -6866,8 +6866,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 317, y: 564}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6939,6 +6939,8 @@ MonoBehaviour:
   p_t3o: {fileID: 542828080}
   p_t3x: {fileID: 1566731393}
   go: {fileID: 1314071809}
+  c_t1: {fileID: 0}
+  c_t2: {fileID: 0}
   t_player: {fileID: 1819252721}
   nt_player: {fileID: 1688027924}
   tp_wnum: {fileID: 1753906847}
@@ -6964,6 +6966,8 @@ MonoBehaviour:
   choicecolor: 0
   turnidx: 0
   turncolor: 0
+  cpucnt: 0
+  cpu_oorc: 0
   game_mode: 2
 --- !u!114 &1227368067
 MonoBehaviour:

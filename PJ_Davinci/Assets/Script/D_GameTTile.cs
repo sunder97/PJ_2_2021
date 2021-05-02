@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 시작 전 카드 4장 뽑기 단계 및 플레이어 턴 시작 시 카드 1장을 뽑는 단계 노출
 public class D_GameTTile : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -21,18 +22,20 @@ public class D_GameTTile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 1플레이어의 턴일 때, 해당 플레이어가 가진 색상별 타일의 개수를 보여줌
         if (d_gamescene.player_turn == 1)
         {
             White_num.GetComponent<Text>().text = "x " + d_gamescene.p1_wcount;
             Black_num.GetComponent<Text>().text = "x " + d_gamescene.p1_bcount;
         }
+        // 2플레이어의 턴일 때, 해당 플레이어가 가진 색상별 타일의 개수를 보여줌
         else
         {
             White_num.GetComponent<Text>().text = "x " + d_gamescene.p2_wcount;
             Black_num.GetComponent<Text>().text = "x " + d_gamescene.p2_bcount;
         }
 
-
+        // 게임 시작 전 각 플레이어가 타일 4장을 뽑는 단계
         if (d_gamescene.game_state == 0)
         {
             // 시작 전 1Player 차례
@@ -67,6 +70,8 @@ public class D_GameTTile : MonoBehaviour
                 d_gamescene.game_state = 1;
             }
         }
+        
+        // 게임 시작 후 플레이어가 턴을 시작하고 나서 처음 타일 1장을 뽑는 단계
         else if (d_gamescene.game_state == 1)
         {
             // 시작 후 1Player 차례
@@ -79,12 +84,17 @@ public class D_GameTTile : MonoBehaviour
             {
                 take_tile_txt.GetComponent<Text>().text = "Player 2의 차례 입니다\n 숫자 타일을 1장 골라주세요";
             }
-            // 1P 모드 시작 후 1Player 차례
-            else
-            {
-                // CPU 진행 패널 만들어서 그 패널 띄워줘야 함
-            }
         }
         
     }
+
+    /* 
+     * 타일을 뽑는 단계에서 생기는 버그
+     * 한 색상의 모든 타일을 다 뽑은 경우에 더 이상 해당 아이콘 클릭 시 함수가 실행되지 않게 해야합니다.
+     * 간단히 함수를 실행되지 않게 하는 것 보다, UI적인 측면에서 플레이어에게 더 이상 타일이 존재하지 않는 다는 것을 보여줘야 합니다.
+     * 따라서, 아이콘의 변경이나 안내 패널 등의 코드가 필요합니다.
+     */
+
+    // 아직 미구현
+
 }

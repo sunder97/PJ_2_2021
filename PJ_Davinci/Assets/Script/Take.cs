@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 카드 선택 시 실행되는 스크립트
 public class Take : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -22,11 +23,12 @@ public class Take : MonoBehaviour
         
     }
 
-    
+    // 하얀색 타일 선택 시 실행되는 함수 :: 하얀색 타일 배열 내 랜덤 위치의 타일을 플레이어의 타일로 가져옴
     public void w_take()
     {
         ran_num = Random.Range(1, d_gamescene.white_tile.Count());
 
+        // 플레이어 1
         if (d_gamescene.player_turn == 1)
         {
             d_gamescene.p1_tile[d_gamescene.p1_count] = d_gamescene.white_tile[ran_num];
@@ -40,6 +42,7 @@ public class Take : MonoBehaviour
                 d_gamescene.game_state = 2;
             }
         }
+        // 플레이어 2
         else
         {
             d_gamescene.p2_tile[d_gamescene.p2_count] = d_gamescene.white_tile[ran_num];
@@ -51,10 +54,13 @@ public class Take : MonoBehaviour
             if (d_gamescene.game_state == 1) d_gamescene.game_state = 2;
         }
     }
+
+    // 검정색 타일 선택 시 실행되는 함수 :: 검정색 타일 배열 내 랜덤 위치의 타일을 플레이어의 타일로 가져옴
     public void b_take()
     {
         ran_num = Random.Range(1, d_gamescene.black_tile.Count());
 
+        // 플레이어 1
         if (d_gamescene.player_turn == 1)
         {
             d_gamescene.p1_tile[d_gamescene.p1_count] = d_gamescene.black_tile[ran_num];
@@ -65,6 +71,7 @@ public class Take : MonoBehaviour
             d_gamescene.black_tile.RemoveAt(ran_num);
             if (d_gamescene.game_state == 1) d_gamescene.game_state = 2;
         }
+        // 플레이어 2
         else
         {
             d_gamescene.p2_tile[d_gamescene.p2_count] = d_gamescene.black_tile[ran_num];
@@ -77,12 +84,14 @@ public class Take : MonoBehaviour
         }
     }
     
+    // 가져온 타일을 숫자 및 색상에 따라 정렬해주는 함수
     void card_swap(int p_turn, int p_count)
     {
         int swap;
 
         for (int pc = p_count; pc > 0; pc--)
         {
+            // 플레이어 1
             if (p_turn == 1)
             {
                 if (d_gamescene.p1_tile[pc] > d_gamescene.p1_tile[pc - 1])
@@ -113,6 +122,8 @@ public class Take : MonoBehaviour
                     d_gamescene.turnidx = 0;
                 }
             }
+
+            // 플레이어 2
             else
             {
                 if (d_gamescene.p2_tile[pc] > d_gamescene.p2_tile[pc - 1])

@@ -23,6 +23,7 @@ public class CT2 : MonoBehaviour
         cpu_endview();
     }
 
+
     // cpu 상태 보여주고 턴 넘기기
     public void cpu_endview()
     {
@@ -68,6 +69,7 @@ public class CT2 : MonoBehaviour
         }
     }
 
+    // 플레이어의 턴으로 넘어가는 함수
     public void cpu_turnend()
     {
         d_gamescene.game_state = 1;

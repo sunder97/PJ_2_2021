@@ -34,6 +34,7 @@ public class D_GameScene : MonoBehaviour
     public int turnidx, turncolor;
     public int cpucnt = 0;
     public bool cpu_oorc;
+    public int cpu_notO = 0;
 
     // 게임 모드 숫자에 따라 1P, 2P
     public int game_mode;
@@ -44,9 +45,10 @@ public class D_GameScene : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // update 안에 들어가 있는 코드들은 기본 인게임 화면에 노출되는 플레이어와 대결상대의 상태를 나타냄
     void Update()
     {
+        // 1플레이어의 차례일 때
         if (player_turn == 1)
         {
             t_player.GetComponent<Text>().text = "Player 1";
@@ -57,6 +59,8 @@ public class D_GameScene : MonoBehaviour
             ntp_wnum.GetComponent<Text>().text = "x " + p2_wcount;
             ntp_bnum.GetComponent<Text>().text = "x " + p2_bcount;
         }
+        
+        // 2플레이어 or CPU의 차례일 때
         else
         {
             if (game_mode == 2) t_player.GetComponent<Text>().text = "Player 2";
@@ -68,17 +72,20 @@ public class D_GameScene : MonoBehaviour
             ntp_bnum.GetComponent<Text>().text = "x " + p1_bcount;
         }
 
+        // CPU 결과창 노출
         if (game_state == -2)
         {
             c_t2.SetActive(true);
             c_t1.SetActive(false);
         }
+        // CPU AI 진행창 노출
         else if (game_state == -1)
         {
             c_t1.SetActive(true);
             p_t3o.SetActive(false);
             p_t3x.SetActive(false);
         }
+        // 시작 전 카드 4장 뽑기 단계 및 플레이어 턴 시작 시 카드 1장을 뽑는 단계 노출
         else if (game_state <= 1)
         {
             tcs.SetActive(true);
@@ -90,26 +97,31 @@ public class D_GameScene : MonoBehaviour
             p_t3x.SetActive(false);
             go.SetActive(false);
         }
+        // 상대 타일 중 맞출 타일 하나를 선택하는 단계 노출
         else if (game_state == 2)
         {
             p_t1.SetActive(true);
             tcs.SetActive(false);
         }
+        // 선택한 상대의 타일의 숫자를 입력하는 단계 노출
         else if (game_state == 3)
         {
             p_t2.SetActive(true);
             p_t1.SetActive(false);
         }
+        // 상대의 타일을 맞췄을 때, 노출
         else if (game_state == 4)
         {
             p_t3o.SetActive(true);
             p_t2.SetActive(false);
         }
+        // 상대의 타일을 맞추지 못했을 때, 노출
         else if (game_state == 5)
         {
             p_t3x.SetActive(true);
             p_t2.SetActive(false);
         }
+        // 어느 한 쪽이 승리조건을 달성했을 시, 노출
         else
         {
             go.SetActive(true);

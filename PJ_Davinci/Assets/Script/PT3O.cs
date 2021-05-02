@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 플레이어가 상대의 타일을 맞췄을 때 실행되는 스크립트
 public class PT3O : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -16,7 +17,7 @@ public class PT3O : MonoBehaviour
         d_gamescene = GameObject.Find("Canvas").GetComponent<D_GameScene>();
     }
 
-    // Update is called once per frame
+    // 인게임 내 노출되는 텍스트 및 맞춘 상대의 타일 이미지
     void Update()
     {
         pt3otxt.GetComponent<Text>().text = "현재 Player " + d_gamescene.player_turn + "의 차례 입니다\n맞았습니다! 더 하시겠습니까?";
@@ -27,7 +28,7 @@ public class PT3O : MonoBehaviour
         corr_txt.GetComponent<Text>().text = "" + d_gamescene.choiceNum;
     }
 
-    // 맞췄을 때 한 번더
+    // 맞췄을 때 한번더
     public void one_more()
     {
         d_gamescene.game_state = 2;

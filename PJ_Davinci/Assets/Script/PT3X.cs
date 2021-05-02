@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 상대의 타일을 맞추지 못했을 때 실행되는 스크립트
 public class PT3X : MonoBehaviour
 {
     D_GameScene d_gamescene;
@@ -30,6 +31,7 @@ public class PT3X : MonoBehaviour
 
         for (int i = 0; i < 14; i++)
         {
+            // 플레이어 1
             if (d_gamescene.player_turn == 1)
             {
                 // Black 3, 4
@@ -59,6 +61,7 @@ public class PT3X : MonoBehaviour
                     pt3xTiletxt[i].GetComponent<Text>().text = "";
                 }
             }
+            // 플레이어 2
             else
             {
                 // Black 3, 4

@@ -17,6 +17,7 @@ public class SceneMove : MonoBehaviour
 
     }
 
+    // 메인 Scene에서 1Player 및 2Player 버튼 클릭 시 Scene 이동
     public void SingleChange()
     {
         SceneManager.LoadScene("SingleGameScene");
