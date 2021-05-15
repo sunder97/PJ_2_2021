@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,12 +23,28 @@ public class CT1 : MonoBehaviour
 
     void cpuTurn()
     {
-        int rn = Random.Range(0, 2);
-        d_gamescene.player_turn = 2;
-        if (rn == 0) take_tile.w_take();
-        else take_tile.b_take();
-        d_gamescene.player_turn = 1;
-
+        // 타일을 랜덤으로 하나 가져오는 경우
+        if (d_gamescene.white_tile.Count() == 1 && d_gamescene.black_tile.Count() == 1) { }
+        else if (d_gamescene.black_tile.Count() == 1)
+        {
+            d_gamescene.player_turn = 2;
+            take_tile.w_take();
+            d_gamescene.player_turn = 1;
+        }
+        else if (d_gamescene.white_tile.Count() == 1)
+        {
+            d_gamescene.player_turn = 2;
+            take_tile.b_take();
+            d_gamescene.player_turn = 1;
+        }
+        else
+        {
+            int rn = Random.Range(0, 2);
+            d_gamescene.player_turn = 2;
+            if (rn == 0) take_tile.w_take();
+            else take_tile.b_take();
+            d_gamescene.player_turn = 1;
+        }
         // CPU의 AI를 만들어야 합니다.
 
         /* 대안 0

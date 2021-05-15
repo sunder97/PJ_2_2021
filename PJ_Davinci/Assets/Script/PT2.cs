@@ -8,6 +8,7 @@ public class PT2 : MonoBehaviour
 {
     D_GameScene d_gamescene;
 
+
     public GameObject choice_tile;
     public InputField input_num;
     // Start is called before the first frame update
@@ -30,6 +31,24 @@ public class PT2 : MonoBehaviour
     // 플레이어가 타일의 숫자를 입력 후 버튼 터치 시 실행되는 함수
     public void pt2_btn()
     {
+        try
+        {
+            int a = int.Parse(input_num.text);
+        }
+        catch
+        {
+            d_gamescene.nob_tile.SetActive(true);
+            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "올바른 숫자가 아닙니다. 1~13사이의 수를 입력해주세요.";
+            return;
+        }
+
+        if (int.Parse(input_num.text) < 1 || int.Parse(input_num.text) > 13)
+        {
+            d_gamescene.nob_tile.SetActive(true);
+            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "올바른 숫자가 아닙니다. 1~13사이의 수를 입력해주세요.";
+            return;
+        }
+
         // 일치했을 때
         if (d_gamescene.choiceNum == int.Parse(input_num.text))
         {

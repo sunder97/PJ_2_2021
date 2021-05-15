@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 public class Take : MonoBehaviour
 {
     D_GameScene d_gamescene;
+
     // Start is called before the first frame update
 
     int ran_num;
@@ -26,6 +28,14 @@ public class Take : MonoBehaviour
     // 하얀색 타일 선택 시 실행되는 함수 :: 하얀색 타일 배열 내 랜덤 위치의 타일을 플레이어의 타일로 가져옴
     public void w_take()
     {
+        Debug.Log(d_gamescene.white_tile.Count());
+        if (d_gamescene.white_tile.Count() == 1)
+        {
+            d_gamescene.nob_tile.SetActive(true);
+            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "현재 남아있는\n백색 타일이 없습니다";
+            return;
+        }
+
         ran_num = Random.Range(1, d_gamescene.white_tile.Count());
 
         // 플레이어 1
@@ -58,6 +68,13 @@ public class Take : MonoBehaviour
     // 검정색 타일 선택 시 실행되는 함수 :: 검정색 타일 배열 내 랜덤 위치의 타일을 플레이어의 타일로 가져옴
     public void b_take()
     {
+        if (d_gamescene.black_tile.Count() == 1)
+        {
+            d_gamescene.nob_tile.SetActive(true);
+            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "현재 남아있는\n흑색 타일이 없습니다";
+            return;
+        }
+
         ran_num = Random.Range(1, d_gamescene.black_tile.Count());
 
         // 플레이어 1

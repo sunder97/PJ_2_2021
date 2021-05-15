@@ -37,7 +37,11 @@ public class PT3X : MonoBehaviour
                 // Black 3, 4
                 if (d_gamescene.p1_tile_state[i] >= 3)
                 {
-                    if (d_gamescene.p1_tile_state[i] == 3) pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("Black", typeof(Sprite)) as Sprite;
+                    if (d_gamescene.p1_tile_state[i] == 3)
+                    {
+                        pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("Black", typeof(Sprite)) as Sprite;
+                        pt3xTiletxt[i].GetComponent<Text>().text = "";
+                    }
                     else
                     {
                         pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("BlackO", typeof(Sprite)) as Sprite;
@@ -47,7 +51,11 @@ public class PT3X : MonoBehaviour
                 // White 1, 2
                 else if (d_gamescene.p1_tile_state[i] >= 1)
                 {
-                    if (d_gamescene.p1_tile_state[i] == 1) pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("White", typeof(Sprite)) as Sprite;
+                    if (d_gamescene.p1_tile_state[i] == 1)
+                    {
+                        pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("White", typeof(Sprite)) as Sprite;
+                        pt3xTiletxt[i].GetComponent<Text>().text = "";
+                    }
                     else
                     {
                         pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("WhiteO", typeof(Sprite)) as Sprite;
@@ -67,7 +75,11 @@ public class PT3X : MonoBehaviour
                 // Black 3, 4
                 if (d_gamescene.p2_tile_state[i] >= 3)
                 {
-                    if (d_gamescene.p2_tile_state[i] == 3) pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("Black", typeof(Sprite)) as Sprite;
+                    if (d_gamescene.p2_tile_state[i] == 3)
+                    {
+                        pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("Black", typeof(Sprite)) as Sprite;
+                        pt3xTiletxt[i].GetComponent<Text>().text = "";
+                    }
                     else
                     {
                         pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("BlackO", typeof(Sprite)) as Sprite;
@@ -77,7 +89,11 @@ public class PT3X : MonoBehaviour
                 // White 1, 2
                 else if (d_gamescene.p2_tile_state[i] >= 1)
                 {
-                    if (d_gamescene.p2_tile_state[i] == 1) pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("White", typeof(Sprite)) as Sprite;
+                    if (d_gamescene.p2_tile_state[i] == 1)
+                    {
+                        pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("White", typeof(Sprite)) as Sprite;
+                        pt3xTiletxt[i].GetComponent<Text>().text = "";
+                    }
                     else
                     {
                         pt3xTile[i].GetComponent<Image>().sprite = Resources.Load("WhiteO", typeof(Sprite)) as Sprite;

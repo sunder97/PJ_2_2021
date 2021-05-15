@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class D_GameScene : MonoBehaviour
 {
-    public GameObject tcs, p_t1, p_t2, p_t3o, p_t3x, go, c_t1, c_t2;
+    public GameObject tcs, p_t1, p_t2, p_t3o, p_t3x, go, c_t1, c_t2, nob_tile;
 
     public GameObject t_player, nt_player, tp_wnum, tp_bnum, ntp_wnum, ntp_bnum;
+    public GameObject nob_tile_txt;
 
     // 덱의 상태
     public List<int> white_tile = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
@@ -75,13 +76,13 @@ public class D_GameScene : MonoBehaviour
         // CPU 결과창 노출
         if (game_state == -2)
         {
-            c_t2.SetActive(true);
-            c_t1.SetActive(false);
+            if (game_mode == 2) c_t2.SetActive(true);
+            if (game_mode == 2) c_t1.SetActive(false);
         }
         // CPU AI 진행창 노출
         else if (game_state == -1)
         {
-            c_t1.SetActive(true);
+            if (game_mode == 2) c_t1.SetActive(true);
             p_t3o.SetActive(false);
             p_t3x.SetActive(false);
         }
@@ -89,8 +90,8 @@ public class D_GameScene : MonoBehaviour
         else if (game_state <= 1)
         {
             tcs.SetActive(true);
-            c_t1.SetActive(false);
-            c_t2.SetActive(false);
+            if (game_mode == 2) c_t1.SetActive(false);
+            if (game_mode == 2) c_t2.SetActive(false);
             p_t1.SetActive(false);
             p_t2.SetActive(false);
             p_t3o.SetActive(false);
