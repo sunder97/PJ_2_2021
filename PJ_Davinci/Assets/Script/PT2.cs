@@ -38,14 +38,14 @@ public class PT2 : MonoBehaviour
         catch
         {
             d_gamescene.nob_tile.SetActive(true);
-            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "올바른 숫자가 아닙니다. 1~13사이의 수를 입력해주세요.";
+            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "올바른 숫자가 아닙니다. 0~13사이의 수를 입력해주세요.";
             return;
         }
 
         if (int.Parse(input_num.text) < 1 || int.Parse(input_num.text) > 13)
         {
             d_gamescene.nob_tile.SetActive(true);
-            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "올바른 숫자가 아닙니다. 1~13사이의 수를 입력해주세요.";
+            d_gamescene.nob_tile_txt.GetComponent<Text>().text = "올바른 숫자가 아닙니다. 0~13사이의 수를 입력해주세요.";
             return;
         }
 

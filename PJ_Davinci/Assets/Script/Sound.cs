@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 
 // 사운드 스크립트, 아직 미구현
-public class Option : MonoBehaviour
+public class Sound : MonoBehaviour
 {
-    public Slider BGMslider, SEslider;
-    public AudioSource bgm, se;
+    public Slider BGMslider;
+    public AudioSource bgm;
 
     private float bgmvolGage = 1f;
     private float sevolGage = 1f;
@@ -16,20 +16,17 @@ public class Option : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(transform.gameObject);
+
         bgmvolGage = PlayerPrefs.GetFloat("bgmvolGage", 1f);
         BGMslider.value = bgmvolGage;
         bgm.volume = BGMslider.value;
-
-        sevolGage = PlayerPrefs.GetFloat("sevolGage", 1f);
-        SEslider.value = sevolGage;
-        se.volume = SEslider.value;
     }
 
     // Update is called once per frame
     void Update()
     {
         BGMSliderF();
-        SESliderF();
     }
 
     public void BGMSliderF()
@@ -37,12 +34,5 @@ public class Option : MonoBehaviour
         bgm.volume = BGMslider.value;
         bgmvolGage = BGMslider.value;
         PlayerPrefs.SetFloat("bgmvolGage", 1f);
-    }
-
-    public void SESliderF()
-    {
-        se.volume = SEslider.value;
-        sevolGage = SEslider.value;
-        PlayerPrefs.SetFloat("sevolGage", 1f);
     }
 }

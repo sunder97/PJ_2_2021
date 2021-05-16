@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\CT1.cs" />
     <Compile Include="Assets\Script\CT2.cs" />
+    <Compile Include="Assets\Script\DDonload.cs" />
     <Compile Include="Assets\Script\D_GameScene.cs" />
     <Compile Include="Assets\Script\D_GameTTile.cs" />
     <Compile Include="Assets\Script\Deck_update.cs" />
