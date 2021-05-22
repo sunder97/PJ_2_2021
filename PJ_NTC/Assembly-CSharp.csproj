@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Game_state.cs" />
+    <Compile Include="Assets\Script\InGame_state.cs" />
     <Compile Include="Assets\Script\main_btn.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/UNITY/2019.4.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
