@@ -77,4 +77,13 @@ public class main_btn : MonoBehaviour
     {
         gamestate.menual_page_num = 1;
     }
+
+    public void name_change_x_btn()
+    {
+        return;
+    }
+    public void name_change_ok_btn()
+    {
+        return;
+    }
 }
