@@ -11,7 +11,7 @@ public class Game_state : MonoBehaviour
     public int pnum = 4;                // player 수
     public int menual_page_num = 1;            // menual 페이지
 
-    public string[] player_name = new string[] { "player1", "player2", "player3", "player4", "player5", "player6" };
+    public string[] player_name = new string[] { "player 1", "player 2", "player 3", "player 4", "player 5", "player 6" };
 
     // Start is called before the first frame update
     void Start()

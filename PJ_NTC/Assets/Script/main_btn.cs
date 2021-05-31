@@ -60,6 +60,12 @@ public class main_btn : MonoBehaviour
 
     public void start_btn()
     {
+        PlayerPrefs.SetString("p1", gamestate.player_name[0]);
+        PlayerPrefs.SetString("p2", gamestate.player_name[1]);
+        PlayerPrefs.SetString("p3", gamestate.player_name[2]);
+        PlayerPrefs.SetString("p4", gamestate.player_name[3]);
+        PlayerPrefs.SetString("p5", gamestate.player_name[4]);
+        PlayerPrefs.SetString("p6", gamestate.player_name[5]);
         PlayerPrefs.SetInt("player_num", gamestate.pnum);
         SceneManager.LoadScene("Game_Scene");
     }
