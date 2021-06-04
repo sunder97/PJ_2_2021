@@ -18,6 +18,11 @@ public class InGame_state : MonoBehaviour
     int[] role_card = new int[6];                                                       // 역할 카드. 1이 해적, 2가 스켈레톤
     string[] s_name = new string[] { "none", "none" };                                  // 스켈레톤인 플레이어의 이름
 
+    // 카드 확인용
+    public GameObject pcv, pcv_txt;                                 // 카드 확인용 버튼 및 텍스트
+    public GameObject pcv_c_txt, pcv_c_up, pcv_c_down, pcv_c_btn;   // 카드 확인할 플레이어 선택창 내 오브젝트
+    public GameObject pcv_tr, pcv_box, pcv_ntk, pcv_ex_txt;                     // 카드 확인창 오브젝트
+    int pcv_player = 0;
 
     // 0단계
     public GameObject p0r_txt;                              // 진행 0단계 텍스트 변경을 위한 오브젝트
@@ -40,6 +45,7 @@ public class InGame_state : MonoBehaviour
     public GameObject p2c1, p2c2, p2c3, p2c4, p2c5;         // 뽑을 카드
     public GameObject p2r_txt, p2r_img;                     // 뽑은 카드 결과 확인용 오브젝트
     int[] choose_card = new int[3] { 0, 0, 0 };             // 현재까지 뽑힌 카드
+    int[] round_choose_card = new int[3] { 0, 0, 0 };       // 현재 라운드에 뽑힌 카드
     int p_cnum = 0;                                         // 진행 2단계 플레이어 선택에 쓰일 변수
     int round_count = 1;                                    // 현재 라운드의 수
     int take_card_num = 0;                                  // 현재 라운드에서 공개된 카드의 개수
@@ -75,6 +81,17 @@ public class InGame_state : MonoBehaviour
     // 게임의 상태를 파악해, 텍스트를 바꾸는 것으로 활용하려고 합니다.
     void Update()
     {
+        if (game_state >= 2)
+        {
+            pcv.SetActive(true);
+            pcv_txt.SetActive(true);
+        }
+        else
+        {
+            pcv.SetActive(false);
+            pcv_txt.SetActive(false);
+        }
+
         if (game_state == -1)
             game_txt.GetComponent<Text>().text = "";
         else if (game_state == 0)
@@ -87,7 +104,6 @@ public class InGame_state : MonoBehaviour
             game_txt.GetComponent<Text>().text = "3. 라운드 진행 결과  현재 " + round_count + "라운드의 진행 결과,\n 빈 상자 " + choose_card[0] + "장, 보물 상자 " + choose_card[1] + "장이 나왔습니다.";
         else if (game_state == 4)
             game_txt.GetComponent<Text>().text = "4. 게임 결과\n게임이 끝났습니다.";
-
     }
 
     // Game Reset 함수
@@ -97,6 +113,30 @@ public class InGame_state : MonoBehaviour
         game_state = 0;
     }
 
+    // 카드 확인용 함수
+    public void pcv_btn()
+    {
+        pcv_box.GetComponent<Text>().text = "x " + player_card_num[pcv_player, 0];
+        pcv_tr.GetComponent<Text>().text = "x " + player_card_num[pcv_player, 1];
+        pcv_ntk.GetComponent<Text>().text = "x " + player_card_num[pcv_player, 2];
+        pcv_ex_txt.GetComponent<Text>().text = p_name[pcv_player] + "의\n현재 라운드 소지 카드입니다";
+    }
+
+    // 카드 확인 플레이어 선택용 버튼1
+    public void pcv_choice_prev()
+    {
+        if (pcv_player == 0) pcv_player = players - 1;
+        else pcv_player--;
+        pcv_c_txt.GetComponent<Text>().text = p_name[pcv_player];
+    }
+
+    // 카드 확인 플레이어 선택용 버튼2
+    public void pcv_choice_next()
+    {
+        if (pcv_player == players - 1) pcv_player = 0;
+        else pcv_player++;
+        pcv_c_txt.GetComponent<Text>().text = p_name[pcv_player];
+    }
 
     // Game_state 0. 게임 준비      게임 시작 전, 세력을 나누는 단계
 
@@ -150,12 +190,12 @@ public class InGame_state : MonoBehaviour
         else player_team[5] = role_card[5];
 
         if (player_team[turn_player - 1] == 1)
-            p0r_txt.GetComponent<Text>().text = "Player " + turn_player + "의 세력은\n해적입니다.";
+            p0r_txt.GetComponent<Text>().text = p_name[turn_player - 1] + "의 세력은\n해적입니다.";
         else
         {
             if (s_name[0] == "none") s_name[0] = p_name[turn_player - 1];
             else s_name[1] = p_name[turn_player - 1];
-            p0r_txt.GetComponent<Text>().text = "Player " + turn_player + "의 세력은\n스켈레톤입니다.";
+            p0r_txt.GetComponent<Text>().text = p_name[turn_player - 1] + "의 세력은\n스켈레톤입니다.";
         }
 
 
@@ -239,6 +279,7 @@ public class InGame_state : MonoBehaviour
             p1.SetActive(false);
             p2pc.SetActive(true);
             p2_txt.GetComponent<Text>().text = p_name[p_cnum];
+            pcv_c_txt.GetComponent<Text>().text = p_name[pcv_player];
             return;
         }
 
@@ -304,15 +345,15 @@ public class InGame_state : MonoBehaviour
         int card_num = PlayerPrefs.GetInt("choice_card");
 
         if (card_num == 0) {
-            choose_card[0]++; player_card_num[p_cnum, 0]--;
+            choose_card[0]++; round_choose_card[0]++;  player_card_num[p_cnum, 0]--;
             p2r_txt.GetComponent<Text>().text = "뽑은 카드는\n 빈 상자입니다. 현재 라운드에서 뽑은 카드는 " + take_card_num + "장이며, " + p_name[p_cnum] + "의 차례로 넘어갑니다.";
         }
         else if (card_num == 1) {
-            choose_card[1]++; player_card_num[p_cnum, 1]--;
+            choose_card[1]++; round_choose_card[1]++; player_card_num[p_cnum, 1]--;
             p2r_txt.GetComponent<Text>().text = "뽑은 카드는\n 보물 상자입니다. 현재 라운드에서 뽑은 카드는 " + take_card_num + "장이며, " + p_name[p_cnum] + "의 차례로 넘어갑니다.";
         }
         else {
-            choose_card[2]++; player_card_num[p_cnum, 2]--;
+            choose_card[2]++; round_choose_card[2]++; player_card_num[p_cnum, 2]--;
             p2r_txt.GetComponent<Text>().text = "뽑은 카드는\n 크라켄입니다. 결과창으로 넘어갑니다.";
         }
 
@@ -361,7 +402,11 @@ public class InGame_state : MonoBehaviour
     // 라운드마다 리셋해줘야하는 변수들을 초기화 시켜주는 함수
     void round_reset()
     {
-        for (int i = 0; i < 2; i++) game_card[i] = game_card[i] - choose_card[i];
+        for (int i = 0; i < 2; i++)
+        {
+            game_card[i] = game_card[i] - round_choose_card[i];
+            round_choose_card[i] = 0;
+        }
         player_card_num = new int[6,3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
     }
 

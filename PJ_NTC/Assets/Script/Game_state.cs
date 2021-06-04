@@ -13,6 +13,12 @@ public class Game_state : MonoBehaviour
 
     public string[] player_name = new string[] { "player 1", "player 2", "player 3", "player 4", "player 5", "player 6" };
 
+    public InputField p1_str, p2_str, p3_str, p4_str, p5_str, p6_str;
+    public GameObject p1_txt, p2_txt, p3_txt, p4_txt, p5_txt, p6_txt;
+
+    public GameObject nc_check_txt;
+    public int nc_check_ver;
+
     // Start is called before the first frame update
     void Start()
     {

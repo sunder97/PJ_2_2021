@@ -84,12 +84,29 @@ public class main_btn : MonoBehaviour
         gamestate.menual_page_num = 1;
     }
 
-    public void name_change_x_btn()
+    public void name_change_btn()
     {
-        return;
+        gamestate.p1_txt.GetComponent<Text>().text = gamestate.player_name[0];
+        gamestate.p2_txt.GetComponent<Text>().text = gamestate.player_name[1];
+        gamestate.p3_txt.GetComponent<Text>().text = gamestate.player_name[2];
+        gamestate.p4_txt.GetComponent<Text>().text = gamestate.player_name[3];
+        gamestate.p5_txt.GetComponent<Text>().text = gamestate.player_name[4];
+        gamestate.p6_txt.GetComponent<Text>().text = gamestate.player_name[5];
+
+        gamestate.p1_str.GetComponent<InputField>().text = "";
+        gamestate.p2_str.GetComponent<InputField>().text = "";
+        gamestate.p3_str.GetComponent<InputField>().text = "";
+        gamestate.p4_str.GetComponent<InputField>().text = "";
+        gamestate.p5_str.GetComponent<InputField>().text = "";
+        gamestate.p6_str.GetComponent<InputField>().text = "";
     }
     public void name_change_ok_btn()
     {
-        return;
+        if (gamestate.p1_str.text != "") gamestate.player_name[0] = gamestate.p1_str.text;
+        if (gamestate.p2_str.text != "") gamestate.player_name[1] = gamestate.p2_str.text;
+        if (gamestate.p3_str.text != "") gamestate.player_name[2] = gamestate.p3_str.text;
+        if (gamestate.p4_str.text != "") gamestate.player_name[3] = gamestate.p4_str.text;
+        if (gamestate.p5_str.text != "") gamestate.player_name[4] = gamestate.p5_str.text;
+        if (gamestate.p6_str.text != "") gamestate.player_name[5] = gamestate.p6_str.text;
     }
 }
