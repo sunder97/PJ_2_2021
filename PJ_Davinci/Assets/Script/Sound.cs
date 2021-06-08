@@ -11,7 +11,6 @@ public class Sound : MonoBehaviour
     public AudioSource bgm;
 
     private float bgmvolGage = 1f;
-    private float sevolGage = 1f;
 
     // Start is called before the first frame update
     void Start()

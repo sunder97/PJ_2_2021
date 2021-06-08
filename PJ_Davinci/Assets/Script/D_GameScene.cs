@@ -76,13 +76,13 @@ public class D_GameScene : MonoBehaviour
         // CPU 결과창 노출
         if (game_state == -2)
         {
-            if (game_mode == 2) c_t2.SetActive(true);
-            if (game_mode == 2) c_t1.SetActive(false);
+            if (game_mode == 1) c_t2.SetActive(true);
+            if (game_mode == 1) c_t1.SetActive(false);
         }
         // CPU AI 진행창 노출
         else if (game_state == -1)
         {
-            if (game_mode == 2) c_t1.SetActive(true);
+            if (game_mode == 1) c_t1.SetActive(true);
             p_t3o.SetActive(false);
             p_t3x.SetActive(false);
         }
@@ -90,8 +90,8 @@ public class D_GameScene : MonoBehaviour
         else if (game_state <= 1)
         {
             tcs.SetActive(true);
-            if (game_mode == 2) c_t1.SetActive(false);
-            if (game_mode == 2) c_t2.SetActive(false);
+            if (game_mode == 1) c_t1.SetActive(false);
+            if (game_mode == 1) c_t2.SetActive(false);
             p_t1.SetActive(false);
             p_t2.SetActive(false);
             p_t3o.SetActive(false);
