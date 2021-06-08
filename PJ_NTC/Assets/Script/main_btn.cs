@@ -67,7 +67,7 @@ public class main_btn : MonoBehaviour
         PlayerPrefs.SetString("p5", gamestate.player_name[4]);
         PlayerPrefs.SetString("p6", gamestate.player_name[5]);
         PlayerPrefs.SetInt("player_num", gamestate.pnum);
-        SceneManager.LoadScene("Game_Scene");
+        SceneManager.LoadScene("02.Game_Scene");
     }
 
     public void menual_next_btn()

@@ -11,13 +11,13 @@ public class InGame_state : MonoBehaviour
     public GameObject game_txt;                                                         // 전체적인 진행 단계를 보여주는 텍스트
     public GameObject p0f, p0fs, p1, p01, p2pc, p2c, p2r, p3, p4r;                      // 패널
     public GameObject Cf1, Cf2, Cf3, Cf4, Cf5, Cfs1, Cfs2, Cfs3, Cfs4, Cfs5, Cfs6;      // 초기화에 필요한 오브젝트
+    public Sprite skcard, picard;                                                       // 해적, 스켈레톤 카드 이미지
     string[] p_name;                                                                    // 플레이어 이름
     int players = 0;                                                                    // 플레이어 수
     int turn_player = 0;                                                                // 플레이어의 턴 체크
     int game_state = 0;                                                                 // game 시작 후, game의 상태
     int[] role_card = new int[6];                                                       // 역할 카드. 1이 해적, 2가 스켈레톤
     string[] s_name = new string[] { "none", "none" };                                  // 스켈레톤인 플레이어의 이름
-
     // 카드 확인용
     public GameObject pcv, pcv_txt;                                 // 카드 확인용 버튼 및 텍스트
     public GameObject pcv_c_txt, pcv_c_up, pcv_c_down, pcv_c_btn;   // 카드 확인할 플레이어 선택창 내 오브젝트
@@ -25,14 +25,13 @@ public class InGame_state : MonoBehaviour
     int pcv_player = 0;
 
     // 0단계
-    public GameObject p0r_txt;                              // 진행 0단계 텍스트 변경을 위한 오브젝트
+    public GameObject p0r_txt, p0r_img;                     // 진행 0단계 텍스트 변경을 위한 오브젝트
     int[] player_team = new int[] { 0, 0, 0, 0, 0, 0 };     // 플레이어 세력 넣는 변수
 
 
     // 1단계
     public GameObject p1_txt_tr, p1_txt_ntk, p1_txt_box;    // 진행 1단계 텍스트 변경을 위한 오브젝트
     int check_turn_player = 1;                              // 1~3단계 진행 시, 임시로 턴을 저장하는 변수
-    int player_card_check = 0;                              // 플레이어가 자신의 카드를 확인하는 단계, 0은 바로 뜨는 것을 방지하기 위해 미리 뜨는 화면
     int[] game_card;                                        // 플레이어 수에 따른 탐험카드 개수
     int[] game_card_s;                                      // 셔플용 플레이어 체크 함수
     int[,] player_card = new int[6, 5];                     // 플레이어 소지 카드 변수
@@ -138,6 +137,21 @@ public class InGame_state : MonoBehaviour
         pcv_c_txt.GetComponent<Text>().text = p_name[pcv_player];
     }
 
+    //옵션 내부 게임 종료 버튼
+    public void opt_exit_btn()
+    {
+        p0f.SetActive(false);
+        p0fs.SetActive(false);
+        p1.SetActive(false);
+        p01.SetActive(false);
+        p2pc.SetActive(false);
+        p2c.SetActive(false);
+        p2r.SetActive(false);
+        p3.SetActive(false);
+        p4r.SetActive(false);
+        move_start_scene();
+    }
+
     // Game_state 0. 게임 준비      게임 시작 전, 세력을 나누는 단계
 
     // 롤 카드 섞기/초기화          게임이 끝나면 다시 원래대로 초기화 시키기 위한 함수
@@ -149,6 +163,9 @@ public class InGame_state : MonoBehaviour
             {
                 int ran1 = Random.Range(0, players+1);
                 int ran2 = Random.Range(0, players+1);
+
+                if (ran1 == 6) ran1 = 5;
+                if (ran2 == 6) ran2 = 5;
 
                 int t;
 
@@ -190,12 +207,16 @@ public class InGame_state : MonoBehaviour
         else player_team[5] = role_card[5];
 
         if (player_team[turn_player - 1] == 1)
+        {
             p0r_txt.GetComponent<Text>().text = p_name[turn_player - 1] + "의 세력은\n해적입니다.";
+            p0r_img.GetComponent<Image>().sprite = picard;
+        }
         else
         {
             if (s_name[0] == "none") s_name[0] = p_name[turn_player - 1];
             else s_name[1] = p_name[turn_player - 1];
             p0r_txt.GetComponent<Text>().text = p_name[turn_player - 1] + "의 세력은\n스켈레톤입니다.";
+            p0r_img.GetComponent<Image>().sprite = skcard;
         }
 
 
@@ -346,15 +367,15 @@ public class InGame_state : MonoBehaviour
 
         if (card_num == 0) {
             choose_card[0]++; round_choose_card[0]++;  player_card_num[p_cnum, 0]--;
-            p2r_txt.GetComponent<Text>().text = "뽑은 카드는\n 빈 상자입니다. 현재 라운드에서 뽑은 카드는 " + take_card_num + "장이며, " + p_name[p_cnum] + "의 차례로 넘어갑니다.";
+            p2r_txt.GetComponent<Text>().text = "뽑은 카드는 빈 상자입니다. \n현재 라운드에서 뽑은 카드는 " + take_card_num + "장이며, " + p_name[p_cnum] + "의 차례로 넘어갑니다.";
         }
         else if (card_num == 1) {
             choose_card[1]++; round_choose_card[1]++; player_card_num[p_cnum, 1]--;
-            p2r_txt.GetComponent<Text>().text = "뽑은 카드는\n 보물 상자입니다. 현재 라운드에서 뽑은 카드는 " + take_card_num + "장이며, " + p_name[p_cnum] + "의 차례로 넘어갑니다.";
+            p2r_txt.GetComponent<Text>().text = "뽑은 카드는 보물 상자입니다. \n현재 라운드에서 뽑은 카드는 " + take_card_num + "장이며, " + p_name[p_cnum] + "의 차례로 넘어갑니다.";
         }
         else {
             choose_card[2]++; round_choose_card[2]++; player_card_num[p_cnum, 2]--;
-            p2r_txt.GetComponent<Text>().text = "뽑은 카드는\n 크라켄입니다. 결과창으로 넘어갑니다.";
+            p2r_txt.GetComponent<Text>().text = "뽑은 카드는 크라켄입니다. \n결과창으로 넘어갑니다.";
         }
 
         turn_player = p_cnum + 1;
@@ -421,8 +442,16 @@ public class InGame_state : MonoBehaviour
         if (s_name[1] == "none") s_list = s_name[0];
         else s_list = s_name[0] + ", " + s_name[1];
 
-        if (num == 0) p4r_txt.GetComponent<Text>().text = "스켈레톤 세력의 승리입니다!\n스켈레톤인 플레이어는 " + s_list + "입니다.";
-        else p4r_txt.GetComponent<Text>().text = "해적 세력의 승리입니다!\n스켈레톤인 플레이어는 " + s_list + "입니다.";
+        if (num == 0)
+        {
+            p4r_txt.GetComponent<Text>().text = "스켈레톤 세력의 승리입니다!\n스켈레톤인 플레이어는 " + s_list + "입니다.";
+            p4r_img.GetComponent<Image>().sprite = skcard;
+        }
+        else
+        {
+            p4r_txt.GetComponent<Text>().text = "해적 세력의 승리입니다!\n스켈레톤인 플레이어는 " + s_list + "입니다.";
+            p4r_img.GetComponent<Image>().sprite = picard;
+        }
     }
 
     // 시작 씬 이동 함수
@@ -430,6 +459,6 @@ public class InGame_state : MonoBehaviour
     {
         p4r.SetActive(false);
         game_reset();
-        SceneManager.LoadScene("Start_Scene");
+        SceneManager.LoadScene("01.Start_Scene");
     }
 }
