@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class D_GameScene : MonoBehaviour
@@ -128,5 +129,10 @@ public class D_GameScene : MonoBehaviour
             go.SetActive(true);
             p_t2.SetActive(false);
         }
+    }
+
+    public void op_game_quit_btn()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

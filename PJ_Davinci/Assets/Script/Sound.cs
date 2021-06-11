@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -8,9 +9,11 @@ using UnityEngine.UI;
 public class Sound : MonoBehaviour
 {
     public Slider BGMslider;
-    public AudioSource bgm;
+    private AudioSource bgm;
+    private GameObject[] musics;
 
     private float bgmvolGage = 1f;
+
 
     // Start is called before the first frame update
     void Start()
